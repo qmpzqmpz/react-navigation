@@ -259,6 +259,14 @@ export default function HeaderSegment(props: Props) {
     transform,
   };
 
+  // 웹에서 보기 좋게 하기 위해
+  const webSpecificStyles: ViewStyle = {
+    maxWidth: 984,
+    width: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  };
+  
   // Setting a property to undefined triggers default style
   // So we need to filter them out
   // Users can use `null` instead
@@ -325,7 +333,7 @@ export default function HeaderSegment(props: Props) {
         style={[{ height, minHeight, maxHeight, opacity, transform }]}
       >
         <View pointerEvents="none" style={{ height: headerStatusBarHeight }} />
-        <View pointerEvents="box-none" style={styles.content}>
+        <View pointerEvents="box-none" style={[styles.content, Platform.OS === 'web' && webSpecificStyles]}>
           {leftButton ? (
             <Animated.View
               pointerEvents="box-none"
